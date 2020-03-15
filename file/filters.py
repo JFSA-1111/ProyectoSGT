@@ -11,8 +11,8 @@ class RegistroLlamadaFilter(django_filters.FilterSet):
         widget=forms.CheckboxSelectMultiple
     )
 
-    id_usuario__telefono_fijo = django_filters.CharFilter()
+    id_usuario = django_filters.CharFilter()
 
     class Meta:
         model = RegistroLlamada
-        fields = ['nombre_contesta', 'fecha_entrega', 'id_estado', 'id_grabacion']
+        fields = ['id_grabacion']

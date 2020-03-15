@@ -102,5 +102,10 @@ urlpatterns = [
         route='estadito',
         view=views.CrearEstado.as_view(),
         name='estado'
+    ),
+    path(
+      route='updatEstado',
+      view=views.ActualizarEstado.as_view(),
+      name='actualizar'
     )
 ]

@@ -7,8 +7,9 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, UpdateView, FormView
+from django.views.generic import ListView, UpdateView, FormView, View
 from django.db.models import Q, Count
 from django.db import IntegrityError
 # Modelos
@@ -274,10 +275,36 @@ def search(request):
     return render(request, 'llamada/exportar.html', {'filter': user_filter})
 
 
+@method_decorator(superuser_required, name='dispatch')
 class CrearEstado(ListView, FormView):
     model = Estado
     form_class = EstadoForm
     template_name = 'llamada/estados.html'
+    success_url = reverse_lazy('archivo:estado')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
+class ActualizarEstado(View):
+    def get(self, request):
+        idOtro = request.GET.get('id', None)
+        nombre1 = request.GET.get('nombre', None)
+
+        obj = Estado.objects.get(id=idOtro)
+        obj = Estado.objects.get(nombre=nombre1)
+        obj.save()
+
+        user = {
+            'id': obj.id, 'nombre': obj.nombre
+        }
+        data = {
+            'user': user
+        }
+        return JsonResponse(data=data)
+
+
 
 
 

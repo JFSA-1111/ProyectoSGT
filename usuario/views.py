@@ -185,6 +185,7 @@ class actualizarUsu(View):
 
         obj = User.objects.get(id=id1)
         obj.first_name = nombre1
+
         obj.last_name = apellido1
         obj.save()
 
