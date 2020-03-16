@@ -1,11 +1,14 @@
 {% extends "base/baselogin.html" %}
 {% block head_content %}
     <title>Iniciar Sesion</title>
+
 {% endblock %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'dist/toastr/build/toastr.min.css' %}">
+<script src="{% static 'dist/toastr/build/toastr.min.js' %}"></script>
 {% block container %}
 
-    <form id="Login" action="{% url 'usuario:login' %}" method="POST" autocomplete="off" >
+    <form id="Login" action="{% url 'usuario:login' %}" method="POST" autocomplete="off">
         {% csrf_token %}
         <div class="login-logo">
             <img src="{% static 'dist/img/LogoSGT.png' %}" alt="" srcset="">
@@ -32,15 +35,27 @@
 
 
 
+
     {% if form.errors %}
+        <script>
+            Swal.fire({
+
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Usuario o contraseña invalidos!',
+                }
+            )
+        </script>
         <script>
             {% for field in form %}
                 {% if field.errors %}
-                    Swal.fire(
-                        '<h2>{{ form.non_field_errors }}</h2>',
-                        '<h3>{{ field.label }}: {{ field.errors|striptags }}</h3>',
-                        'error'
-                    )
+                    Swal.fire({
+                        icon: 'error',
+                        title: '{{ form.non_field_errors }}',
+                        text: '{{ field.label }}: {{ field.errors|striptags }}!',
+
+                    })
+
                 {% endif %}
             {% endfor %}
         </script>

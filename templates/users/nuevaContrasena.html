@@ -8,9 +8,7 @@
 {% block main %}
 
     <div class="hk-pg-wrapper hk-auth-wrapper">
-
         <div class="container-fluid">
-
             <div class="auth-form-wrap pt-xl-0 pt-50">
                 <div class="auth-form w-xl-30 w-sm-50 w-100">
                     <a class="auth-brand text-center d-block mb-20" href="#">
@@ -34,10 +32,12 @@
             </div>
         </div>
     </div>
+
+
     {% if form.errors %}
         <script>
             {% for field in form %}
-                  {% if field.errors %}
+                {% if field.errors %}
                     toastr.error('{{ field.label }}:{{ field.errors|striptags }}', '{{ form.non_field_errors }}!')
                 {% endif %}
             {% endfor %}
