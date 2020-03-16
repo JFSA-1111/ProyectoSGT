@@ -1,7 +1,7 @@
-from django.urls import path, include
+from django.contrib.auth import views as auth_views
+from django.urls import path
 
 from usuario import views
-from django.contrib.auth import views as auth_views
 
 urlpatterns = [
 
@@ -12,12 +12,11 @@ urlpatterns = [
     ),
     path(
         route='cambio-contrasena/',
-        view=auth_views.
-            PasswordChangeView.as_view(
-            template_name='users/nuevaContrasena.html'
-        ),
+        view= views.cambio_contrasena,
         name='cambio'
     ),
+
+
     path(
         route='logout/',
         view=views.logout_view,

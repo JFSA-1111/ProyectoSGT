@@ -3,8 +3,9 @@
 
 <head>
     <link rel="icon" type="image/png" sizes="192x192" href="{% static 'dist/img/LogoSGT.png' %}">
-    <title>{{ user }}</title>
+    <title>Configuracion</title>
     <link rel="stylesheet" href="{% static 'dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dist/toastr/build/toastr.min.css' %}">
 </head>
 <body>
 {% block form %}
@@ -15,7 +16,12 @@
         <div class="container mt-2">
             <div class="card">
                 <div class="card-title ml-2 mt-2">
-                    <h3><i class="fas fa-cog"></i> {{ user }}</h3>
+                    <h3><i class="fas fa-cog"></i> {{ user }}
+                        <a id="atras" href="{% url 'archivo:buzon' %}"
+                           class="btn btn-info"
+                           data-toggle="tooltip" data-placement="right" title="Regresar"><i class="fas fa-undo-alt"></i></a>
+                    </h3>
+
                 </div>
                 <hr>
                 <div class="row">
@@ -153,10 +159,26 @@
 
     <!--/tab-pane-->
 
+    {% if form.errors %}
+        <script>
+            {% for field in form %}
+                {% if field.errors %}
+                    toastr.error('{{ field.label }}:{{ field.errors|striptags }}', '{{ form.non_field_errors }}!')
+                {% endif %}
+            {% endfor %}
+        </script>
+    {% endif %}
 
 
+    <button id="bn">click</button>
 
+    <script>
+        document.getElementById('bn').addEventListener("click", function () {
+            event.preventDefault()
+            toastr.error('I do not think that word means what you think it means.', 'Inconceivable!')
 
+        })
+    </script>
 
 {% endblock %}
 </body>
@@ -165,8 +187,10 @@
     <script src="{% static 'dist/jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'dist/popper.js/dist/umd/popper.min.js' %}"></script>
     <script src="{% static 'dist/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'dist/toastr/build/toastr.min.js' %}"></script>
     <script src="https://kit.fontawesome.com/c7e6a57cdf.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+
     <script>
 
 
@@ -180,7 +204,6 @@
                 }
             })
         });
-
 
         function setInputFilter(textbox, inputFilter) {
             ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function (event) {
@@ -260,6 +283,10 @@
 
     hr {
         border: 1px solid #fff1f1;
+    }
+
+    #atras {
+        margin-left: 83%;
     }
 </style>
 

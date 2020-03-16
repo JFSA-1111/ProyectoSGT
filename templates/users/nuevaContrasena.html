@@ -3,6 +3,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="{% static 'dist/img/LogoSGT.png' %}">
     <title>{{ perfil.usuario.first_name }}</title>
     <link href="{% static 'dist/css/style.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'dist/toastr/build/toastr.min.css' %}">
 {% endblock %}
 {% block main %}
 
@@ -26,9 +27,6 @@
                                 type="submit">
                             Cambiar contraseña
                         </button>
-                        {% if auth_user %}
-
-                        {% endif %}
                         <p class="text-right"><a href="{% url 'usuario:login' %}">Regresar</a>
                         </p>
                     </form>
@@ -36,4 +34,15 @@
             </div>
         </div>
     </div>
+    {% if form.errors %}
+        <script>
+            {% for field in form %}
+                  {% if field.errors %}
+                    toastr.error('{{ field.label }}:{{ field.errors|striptags }}', '{{ form.non_field_errors }}!')
+                {% endif %}
+            {% endfor %}
+        </script>
+    {% endif %}
 {% endblock %}
+
+<script src="{% static 'dist/toastr/build/toastr.min.js' %}"></script>
