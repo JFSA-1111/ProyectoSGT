@@ -9,15 +9,15 @@
 
 {% block main %}
     <div class="container mt-4">
-        <div class="hk-pg-header">
-            <h4 class="hk-pg-title">
-                    <span class="pg-title-icon">
-                    </span><i class="fas fa-file-excel"></i>&nbsp Importe de archivo </h4>
-        </div>
         <div class="container-fluid">
+
             <div class="card">
                 <div class="card-body">
-
+                    <h4 class="hk-pg-title card-title">
+                    <span class="pg-title-icon">
+                    </span><i class="fas fa-file-excel"></i>&nbsp;Importe de archivo
+                    </h4>
+                    <hr>
                     <div class="container">
                         <div class="custom-file col-md-6 ">
                             <form action="" method="post" enctype="multipart/form-data">
@@ -29,7 +29,7 @@
                                            accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
                                 </div>
                                 <button class="btn btn"
-                                        style="background-color: #36876a; color: #fff1f1" id="btn" type="submit">Enviar
+                                        style="background-color: #36876a; color: #fff1f1" id="btn" type="submit">Importar
                                 </button>
                             </form>
                         </div>
@@ -39,15 +39,22 @@
             {% if errors %}
                 <div class="alert alert-danger alert-dismissible fade show ">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>¡Error este archivo ya existe!</strong>
+                    <strong><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Error este
+                        archivo ya existe!</strong>
                 </div>
             {% endif %}
         </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show ">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> {{ message }}
+                    </strong>
+                </div>
+            {% endfor %}
 
+        {% endif %}
 
-        {% block scripts %}
-            {{ block.super }}
-        {% endblock %}
 
     </div>
 
@@ -73,6 +80,6 @@
 
         })
     </script>
-    </body>
+
 
 {% endblock %}

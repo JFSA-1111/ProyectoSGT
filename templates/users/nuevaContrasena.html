@@ -3,22 +3,20 @@
     <link rel="icon" type="image/png" sizes="192x192" href="{% static 'dist/img/LogoSGT.png' %}">
     <title>{{ perfil.usuario.first_name }}</title>
     <link href="{% static 'dist/css/style.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'dist/toastr/build/toastr.min.css' %}">
 {% endblock %}
 {% block main %}
 
     <div class="hk-pg-wrapper hk-auth-wrapper">
-        <header class="d-flex justify-content-end align-items-center">
-        </header>
         <div class="container-fluid">
-
-            <div class="auth-form-wrap pt-xl-0 pt-70">
+            <div class="auth-form-wrap pt-xl-0 pt-50">
                 <div class="auth-form w-xl-30 w-sm-50 w-100">
                     <a class="auth-brand text-center d-block mb-20" href="#">
-                        <img class="" src="{% static 'dist/img/LogoSGT.png' %}" height="150" size="90"/>
+                        <img class="" src="{% static 'dist/img/LogoSGT.png' %}" height="130" size="90"/>
                     </a>
                     <form method="post">
                         {% csrf_token %}
-                        <h2 class="display-5 mb-10 text-center">Modificar Contraseña</h2>
+                        <h4 class=" mb-10 text-center">Modificar Contraseña</h4>
 
                         <div class="form-group">
                             {{ form }}
@@ -27,9 +25,6 @@
                                 type="submit">
                             Cambiar contraseña
                         </button>
-                        {% if auth_user %}
-
-                        {% endif %}
                         <p class="text-right"><a href="{% url 'usuario:login' %}">Regresar</a>
                         </p>
                     </form>
@@ -37,4 +32,17 @@
             </div>
         </div>
     </div>
+
+
+    {% if form.errors %}
+        <script>
+            {% for field in form %}
+                {% if field.errors %}
+                    toastr.error('{{ field.label }}:{{ field.errors|striptags }}', '{{ form.non_field_errors }}!')
+                {% endif %}
+            {% endfor %}
+        </script>
+    {% endif %}
 {% endblock %}
+
+<script src="{% static 'dist/toastr/build/toastr.min.js' %}"></script>

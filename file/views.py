@@ -3,21 +3,24 @@ import datetime
 # Excel
 import pandas as pd
 # Django
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core import serializers
+from django.db import IntegrityError
+from django.db.models import Q, Count
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, UpdateView, FormView, View
 from django.db.models import Q, Count
 from django.db import IntegrityError
+from django.views.generic import ListView, FormView
+
 # Modelos
 from file.forms import RealizarLlamada, EstadoForm
-from file.models import RegistroLlamada
 from file.models import LlamadasEntrantes, Archivo, Estado
+from file.models import RegistroLlamada
 from usuario.models import Perfil
-
 # Filtros
 from .filters import RegistroLlamadaFilter
 
@@ -36,6 +39,7 @@ def upload_excel(request):
         try:
             archivo = Archivo.objects.create(nombre=nombre)
             archivo.save()
+            messages.success(request, 'Importe con exito!')
         except IntegrityError as e:
             return render(request, 'archivo/fileimport.html', context={"errors": e})
 
@@ -303,8 +307,5 @@ class ActualizarEstado(View):
             'user': user
         }
         return JsonResponse(data=data)
-
-
-
 
 
