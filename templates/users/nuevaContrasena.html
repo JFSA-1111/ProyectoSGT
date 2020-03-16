@@ -7,18 +7,17 @@
 {% block main %}
 
     <div class="hk-pg-wrapper hk-auth-wrapper">
-        <header class="d-flex justify-content-end align-items-center">
-        </header>
+
         <div class="container-fluid">
 
-            <div class="auth-form-wrap pt-xl-0 pt-70">
+            <div class="auth-form-wrap pt-xl-0 pt-50">
                 <div class="auth-form w-xl-30 w-sm-50 w-100">
                     <a class="auth-brand text-center d-block mb-20" href="#">
-                        <img class="" src="{% static 'dist/img/LogoSGT.png' %}" height="150" size="90"/>
+                        <img class="" src="{% static 'dist/img/LogoSGT.png' %}" height="130" size="90"/>
                     </a>
                     <form method="post">
                         {% csrf_token %}
-                        <h2 class="display-5 mb-10 text-center">Modificar Contraseña</h2>
+                        <h4 class=" mb-10 text-center">Modificar Contraseña</h4>
 
                         <div class="form-group">
                             {{ form }}

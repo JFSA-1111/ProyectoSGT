@@ -52,6 +52,7 @@ div::before, div::after {
     justify-content: stretch;
     align-content: flex-start;
     transition: all 0.3s ease;
+    border-radius: 20px;
 }
 
 #container.random {
@@ -101,6 +102,7 @@ div::before, div::after {
     align-items: center;
     justify-content: center;
     transition: all 100ms;
+
 }
 
 .box.ui-selectable, .box.selectable {
@@ -108,21 +110,33 @@ div::before, div::after {
     background-color: #aaa;
 }
 
+
 .box::after {
     font-size: 12px;
     font-family: "Roboto Mono";
 }
 
 .box.ui-selecting {
-    background-color: #006709;
+    background-color: rgba(0, 0, 0, 0.88);
+    border: 1px solid;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px #427388;
+
+
 }
 
 .box.ui-selected {
-    background-color: #25c807;
+    background: #000000; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #434343, #000000); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
 }
 
 .box.ui-deselecting {
-    background-color: rgba(0, 103, 10, 0.5);
+    background-color: rgba(16, 16, 5, 0.5);
 }
 
 .box.floated {
