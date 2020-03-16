@@ -36,7 +36,7 @@
                                             <td class="userNombre userData"
                                                 name="nombre">{{ object.nombre }}</td>
                                             <td>
-                                                <button class="btn btn-dark"><i class="fa fa-pencil"></i></button>
+                                                <button class="btn btn-dark"><i class="fa fa-pencil" onclick="Editar({{ foo.pk }}),open_modal()"></i></button>
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -74,6 +74,9 @@
             </div>
         </div>
     </div>
+    <!-- modificar estado---->
+      <div class="modal fade" id="modal_modificar"> {% include 'llamada/modificar_estado.html' %}</div>
+
     {% block javascript %}
         <script>
           function open_modal() {
@@ -82,17 +85,17 @@
 
                 $("form#update").submit(function () {
                     event.preventDefault();
-                    var id = $('input[name="formId"]').val().trim();
-                    var nombre = $('input[name="formNombre"]').val().trim();
+                    var id1 = $('input[name="formId"]').val().trim();
+                    var nombre1 = $('input[name="formNombre"]').val().trim();
 
 
                     if (nombre) {
                         $.ajax({
-                            url: '{% url "archivo:actualizar" %}',
+                            url: '{% url "archivo:updatEstado" %}',
                             method: 'get',
                             data: {
-                                'id': id,
-                                'nombre': nombre,
+                                'id': id1,
+                                'nombre': nombre1,
 
                             },
                             dataType: 'json',
@@ -128,17 +131,11 @@
                 function Editar(id) {
                     if (id) {
                         tr_id = "#fila-" + id;
-                        nombres = $(tr_id).find(".userNombre").text();
-                        apellidos = $(tr_id).find(".userApellido").text();
-                        cedulas = $(tr_id).find(".userCedula").text();
-                        telefonos = $(tr_id).find(".userTelefono").text();
-                        teles = $(tr_id).find(".userTele").text();
+                        nombre = $(tr_id).find(".NombreEstado").text();
+
                         $('#form-id').val(id);
-                        $('#form-apellido').val(apellidos);
-                        $('#form-nombre').val(nombres);
-                        $('#form-cedula').val(cedulas);
-                        $('#form-telefono').val(telefonos);
-                        $('#form-tele').val(teles);
+                        $('#NombreEstado').val(nombre);
+
                     }
                 }
 
@@ -148,14 +145,7 @@
 
                         if (atributos === "nombre") {
                             $(this).text(user.nombre);
-                        } else if (atributos === "apellido") {
-                            $(this).text(user.apellido);
-                        } else if (atributos === "telefono") {
-                            $(this).text(user.telefono);
-                        } else if (atributos === "cedula") {
-                            $(this).text(user.cedula);
-                        } else {
-                            $(this).text(user.tele);
+
                         }
 
                     });
