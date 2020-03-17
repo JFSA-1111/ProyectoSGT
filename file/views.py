@@ -10,6 +10,7 @@ from django.db import IntegrityError
 from django.db.models import Q, Count
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, UpdateView, FormView, View
 from django.db.models import Q, Count
@@ -46,7 +47,7 @@ def upload_excel(request):
         for data in leido.T.to_dict().values():
             llamadas.append(
                 LlamadasEntrantes(
-                    archivo=archivo,
+                    id_archivo=archivo,
                     nombre_solicitante=data['Nombre solicitante'],
                     ident_fiscal=data['Ident.Fiscal Dest Mcia'],
                     nombre_destinatario=data['Nombre destinatario'],
@@ -130,7 +131,7 @@ def repartir(request):
     archivo = Archivo.objects.last()
 
     #  Se consultan las ultimas llamadas ingresadas de acuerdo a el archivo
-    llamadas = LlamadasEntrantes.objects.filter(archivo=archivo).exclude(estado=True)
+    llamadas = LlamadasEntrantes.objects.filter(id_archivo=archivo).exclude(estado=True)
     if operadores and llamadas:
         contexto = {'operadores': operadores, 'llamadas': llamadas}
         return render(request, 'archivo/repartir.html', contexto)
@@ -189,7 +190,7 @@ class archivoLlamadas(ListView):
 
 def eliminarArchivo(request):
     archivo = request.GET.get('id', None)
-    consulta = LlamadasEntrantes.objects.filter(archivo=archivo)
+    consulta = LlamadasEntrantes.objects.filter(id_archivo=archivo)
     auxiliar = 0
     for i in consulta:
         if i.estado:
