@@ -1,1 +1,1 @@
-web: gunicorn SGT.wsgi --log-file -
+web: gunicorn proyectosgt.wsgi --log-file -
