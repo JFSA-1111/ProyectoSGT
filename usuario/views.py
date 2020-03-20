@@ -215,4 +215,4 @@ def crear_usuario(request):
 
 
 def login_redireccion(request):
-    return redirect('users/login.html')
+    return redirect('usuario:login')
