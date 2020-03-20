@@ -9,6 +9,7 @@ from django.urls import re_path
 import notifications.urls
 from django.urls import reverse_lazy
 
+
 urlpatterns = [
                   path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
                   path('archivo/', include(('file.urls', 'file'), namespace='archivo')),
@@ -30,4 +31,6 @@ urlpatterns = [
                        PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
                        name='password_reset_complete')
 
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
