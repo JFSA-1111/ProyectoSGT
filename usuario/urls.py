@@ -2,6 +2,7 @@ from django.urls import path
 
 from usuario import views
 
+
 urlpatterns = [
 
     path(
@@ -54,5 +55,10 @@ urlpatterns = [
         route='actualizar',
         view=views.actualizarUsu.as_view(),
         name='actualizar'
+    ),
+    path(
+        route='urlparaunacosa',
+        view=views.crear_usuario,
+        name='unacosa'
     ),
 ]

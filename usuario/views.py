@@ -202,3 +202,14 @@ class actualizarUsu(View):
         }
 
         return JsonResponse(data=data)
+
+def crear_usuario(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'archivo_crear.html', context={'form': form})
+    else:
+        form = SignupForm()
+        return render(request, 'archivo_crear.html', context={'form': form})
+        
