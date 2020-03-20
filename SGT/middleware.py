@@ -26,8 +26,6 @@ class ProfileCompleteMiddleware:
                     request.log = True
                     if request.path not in [reverse('usuario:perfil'), reverse('usuario:logout')]:
                         return redirect('usuario:perfil')
-        if request.user.is_anonymous:
-            return redirect('usuario:login')
         request.log = False
         response = self.get_response(request)
         return response
