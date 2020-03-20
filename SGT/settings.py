@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 import dj_database_url
+import django_heroku
 from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -180,3 +181,5 @@ SERVER_EMAIL = EMAIL_HOST_USER
 
 # Date Format
 DATE_INPUT_FORMATS = ['%m/%d/%Y']
+
+django_heroku.settings(locals())
