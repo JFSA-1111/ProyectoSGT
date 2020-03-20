@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'eubhws@n#x628x5c6!snxb_f1*ast515r0yol=x4$!evj63g86'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 #conn = psycopg2.connect(dj_database_url.config(default=config('DATABASE_URL')), sslmode='require')
 ALLOWED_HOSTS = ['proyectosgt.herokuapp.com']
 
