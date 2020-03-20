@@ -62,4 +62,3 @@ urlpatterns = [
         name='unacosa'
     ),
 ]
-login
