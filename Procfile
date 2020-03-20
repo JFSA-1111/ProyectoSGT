@@ -1,1 +1,1 @@
-web: gunicorn SGT.wsgi --log-file -
+web: gSGT.wsgi:application --log-file - --preload --workers 1
