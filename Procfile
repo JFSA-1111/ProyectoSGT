@@ -1,1 +1,1 @@
-web: gSGT.wsgi:application --log-file - --preload --workers 1
+web: gSGT.wsgi:application --log-file --preload --workers 1
