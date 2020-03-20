@@ -10,6 +10,9 @@
     <title>Document</title>
 </head>
 <body>
+{% if form.errors %}
+    {{ form.errors }}
+{% endif %}
 <form action="{% url 'usuario:unacosa' %}">
     {% csrf_token %}
     {{ form.as_p }}
