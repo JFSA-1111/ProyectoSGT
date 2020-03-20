@@ -9,28 +9,30 @@ from django.urls import re_path
 import notifications.urls
 from django.urls import reverse_lazy
 
+from usuario import views
 
 urlpatterns = [
-                  path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
-                  path('archivo/', include(('file.urls', 'file'), namespace='archivo')),
-                  path('usuario/', include(('usuario.urls', 'usuario'), namespace='usuario')),
-                  path('prueba',
-                       TemplateView.as_view(template_name='prueba.html')
-                       ),
-                  path('reset/password_reset', PasswordResetView.as_view(
-                      template_name='registration/password_reset_form.html',
-                      email_template_name="registration/password_reset_email.html"),
-                       name='password_reset'),
-                  path('reset/password_reset_done',
-                       PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'),
-                       name='password_reset_done'),
-                  re_path(r'^reset/(?P<uidb64>[0-9A-za-z_\-]+)/(?P<token>.+)/$',
-                          PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'),
-                          name='password_reset_confirm'),
-                  path('reset/done',
-                       PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
-                       name='password_reset_complete')
+    path(route='login/', view=views.login_redireccion, name='login_redireccion'),
+    path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
+    path('archivo/', include(('file.urls', 'file'), namespace='archivo')),
+    path('usuario/', include(('usuario.urls', 'usuario'), namespace='usuario')),
+    path('prueba',
+         TemplateView.as_view(template_name='prueba.html')
+         ),
+    path('reset/password_reset', PasswordResetView.as_view(
+        template_name='registration/password_reset_form.html',
+        email_template_name="registration/password_reset_email.html"),
+         name='password_reset'),
+    path('reset/password_reset_done',
+         PasswordResetDoneView.as_view(template_name='registration/password_reset_done.html'),
+         name='password_reset_done'),
+    re_path(r'^reset/(?P<uidb64>[0-9A-za-z_\-]+)/(?P<token>.+)/$',
+            PasswordResetConfirmView.as_view(template_name='registration/password_reset_confirm.html'),
+            name='password_reset_confirm'),
+    path('reset/done',
+         PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
+         name='password_reset_complete')
 
-              ]
+]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

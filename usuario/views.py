@@ -212,4 +212,7 @@ def crear_usuario(request):
     else:
         form = SignupForm()
         return render(request, 'archivo_crear.html', context={'form': form})
-        
+
+
+def login_redireccion(request):
+    return redirect('login')
