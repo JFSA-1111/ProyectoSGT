@@ -12,7 +12,7 @@ from django.urls import reverse_lazy
 from usuario import views
 
 urlpatterns = [
-    path(route='login/', view=views.login_redireccion, name='login_redireccion'),
+    path(route='', view=views.login_redireccion, name='login_redireccion'),
     path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
     path('archivo/', include(('file.urls', 'file'), namespace='archivo')),
     path('usuario/', include(('usuario.urls', 'usuario'), namespace='usuario')),
