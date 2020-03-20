@@ -172,6 +172,7 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = 'sgtelemercadeoadsi@gmail.com'
 EMAIL_HOST_PASSWORD = 'sgt2019adsi'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+SERVER_EMAIL = EMAIL_HOST_USER
 
 # Date Format
 DATE_INPUT_FORMATS = ['%m/%d/%Y']
