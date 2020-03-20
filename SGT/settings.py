@@ -12,7 +12,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+import dj_database_url
+from decouple import config
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import psycopg2
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -23,7 +28,8 @@ SECRET_KEY = 'eubhws@n#x628x5c6!snxb_f1*ast515r0yol=x4$!evj63g86'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
+conn = psycopg2.connect(dj_database_url.config(
+        default=config('DATABASE_URL'), sslmode='require'))
 ALLOWED_HOSTS = ['proyectosgt.herokuapp.com']
 
 # Application definition
@@ -84,8 +90,6 @@ WSGI_APPLICATION = 'SGT.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-import dj_database_url
-from decouple import config
 
 DATABASES = {
     'default': dj_database_url.config(
