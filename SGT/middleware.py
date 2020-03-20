@@ -17,8 +17,6 @@ class ProfileCompleteMiddleware:
 
     def __call__(self, request):
         """Código que se ejecutará para cada solicitud antes de que se llame a la vista."""
-        if request.user.is_anonymous:
-            return redirect('usuario:login')
         if not request.user.is_anonymous:
             if not request.user.is_staff:
                 perfil = request.user.perfil
@@ -28,6 +26,8 @@ class ProfileCompleteMiddleware:
                     request.log = True
                     if request.path not in [reverse('usuario:perfil'), reverse('usuario:logout')]:
                         return redirect('usuario:perfil')
+        if request.user.is_anonymous:
+            return redirect('usuario:login')
         request.log = False
         response = self.get_response(request)
         return response
