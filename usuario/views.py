@@ -16,6 +16,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import ListView, UpdateView, FormView, View
 # Forms
 from notifications.signals import notify
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from usuario.forms import SignupForm, PerfilForm
 from usuario.models import Perfil
@@ -154,7 +155,7 @@ class ListEstado(ListView):
         return HttpResponse(data, content_type='application/json')
 
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
         """Update profile view."""
         template_name = 'users/perfil.html'
         model = Perfil
