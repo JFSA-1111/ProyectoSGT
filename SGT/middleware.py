@@ -17,6 +17,8 @@ class ProfileCompleteMiddleware:
 
     def __call__(self, request):
         """Código que se ejecutará para cada solicitud antes de que se llame a la vista."""
+        if request.user.is_anonymous:
+            return redirect('usuario:login')
         if not request.user.is_anonymous:
             if not request.user.is_staff:
                 perfil = request.user.perfil
