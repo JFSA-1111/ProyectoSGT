@@ -261,12 +261,10 @@
 
                     }
                 },
-
             })
         }
 
         function traiga(user, id) {
-            debugger
             $("#nombre_solicitante").val(user.nombre);
             $("#ruta").val(user.ruta);
             $("#telefono").val(user.telefono);
@@ -280,7 +278,7 @@
                 succcesNotification({
                     message: '{{ message }}'
 
-                })
+                });
 
             {% endfor %}
         {% endif %}
